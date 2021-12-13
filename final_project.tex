@@ -9,6 +9,7 @@
 \usepackage{textcomp}
 \usepackage{listings}
 \usepackage{color}
+\usepackage{hyperref}
 
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
@@ -159,22 +160,22 @@ HTTP functions are used when the events associated with a function is an HTTP(s)
 
 A background function is a type of event-driven function. Google Cloud's background functions support Node.js, Go, Python and Java. These type of functions are utilized when a user wants to execute their function indirectly to the event [cite]. This means they will be executed as part of event triggers that occur in supported Google Cloud Platform Event Providers \cite{b7}. An example of such an event could be a message on a Pub/Sub topic. Cloud Pub/Sub is a messaging middleware that is part of the Google Cloud Platform. 
 
-As mentioned prior the arguments in Google's serverless functions pass information about the event associated with the function. In a python environment, the function parameters for a background function will be \verb|{(data, context)}| as shown in Figure 2. Data is a dictionary that contains the data for the event. The format of this dictionary will depend on the event. The parameters are very similar for all other environments. 
+As mentioned prior the arguments in Google's serverless functions pass information about the event associated with the function. In a python environment, the function parameters for a background function will be \verb|{(data, context)}| as shown in \ref{fig:param}. Data is a dictionary that contains the data for the event. The format of this dictionary will depend on the event. The parameters are very similar for all other environments. 
 
 \begin{figure}[htbp]
 \centerline{\includegraphics[width=9cm]{background_parameters.PNG}}
 \caption{Parameters for Background Function in Python Environment \cite{b6}.}
-\label{fig}
+\label{fig:param}
 \end{figure}
 
 \subsection{CloudEvent Functions}
 
-A Cloud Event function is the second type of event-driven function. Like background functions, CloudEvent functions are triggered indirectly by an event. However, CloudEvents functions use an industry-standard event format known as CloudEvents. CloudEvents is a specification for describing event data so that they are comparable in a common way. CloudEvent functions support PHP, C\#, and Ruby. CloudEvent functions have the parameter, a cloudEvent object as seen in Figure 3. This holds all the metadata associated with the event.
+A Cloud Event function is the second type of event-driven function. Like background functions, CloudEvent functions are triggered indirectly by an event. However, CloudEvents functions use an industry-standard event format known as CloudEvents. CloudEvents is a specification for describing event data so that they are comparable in a common way. CloudEvent functions support PHP, C\#, and Ruby. CloudEvent functions have the parameter, a cloudEvent object as seen in \ref{fig:param2}. This holds all the metadata associated with the event.
 
 \begin{figure}[htbp]
 \centerline{\includegraphics[width=9cm]{cloudEvent.PNG}}
 \caption{The properties of a cloudEvent object.}
-\label{fig}
+\label{fig:param2}
 \end{figure}
 
 \subsection{Cloud Function Images }
@@ -223,16 +224,18 @@ curl -X POST "https://YOUR_REGION-YOUR_PROJECT_ID
 --data '{"name":"Cloud Computing"}'
 \end{lstlisting}
 
-\subsection{Results I}
-The table shows the time (ms) it took for 15 requests to complete the functions. We replicated the test 10 times, and what you see is the average of those tests for each result. 
 
-\begin{figure}[htbp]
-\centerline{\includegraphics[width=7cm]{table2.PDF}}
+\subsection{Results I}
+
+\begin{figure}[!htbp]
+\centerline{\includegraphics[width=6.5cm]{table2.PDF}}
 \caption{Time for 15 HTTP functions in Google Cloud Functions and AWS Lambda}
-\label{fig}
+\label{fig:tabletwo}
 \end{figure}
 
-As you can see in Table 2 Google Cloud Functions has a much higher cold start time. When the functions are initially ran, either for the first time, or after an idle period, the function takes considerably longer. Additionally, even disregarding the initial start-up time, AWS Lambda ran all other functions considerably faster as well. 
+The table shows the time (ms) it took for 15 requests to complete the functions. We replicated the test 10 times, and what you see is the average of those tests for each result. 
+
+As you can see in \autoref{fig:tabletwo} Google Cloud Functions has a much higher cold start time. When the functions are initially ran, either for the first time, or after an idle period, the function takes considerably longer. Additionally, even disregarding the initial start-up time, AWS Lambda ran all other functions considerably faster as well. 
 
 \subsection{Design II}
 In our second experiment we timed response times for Google Cloud Functions and AWS Lambda for an HTTP Function that processed data. 
@@ -240,20 +243,20 @@ In our second experiment we timed response times for Google Cloud Functions and 
 \subsection{Results II}
 This experiment was repeated 10 times, and the results you see are the average of each 15 requests. 
 
-\begin{figure}[htbp]
-\centerline{\includegraphics[width=8cm]{table3.PDF}}
+\begin{figure}[!htbp]
+\centerline{\includegraphics[width=7cm]{table3.PDF}}
 \caption{Time for 15 functions in Google Cloud Functions and AWS Lambda}
-\label{fig}
+\label{fig:table3}
 \end{figure}
 
-With this experiment, we was an entirely different result, whereby, Google Cloud Functions was noticeably faster at processing data. 
+As seen in \autoref{fig:table3} with this experiment, we saw an entirely different result, whereby, Google Cloud Functions was noticeably faster at processing data. 
 
 \subsection{Experiment Conclusion}
 
 \begin{figure}[htbp]
 \centerline{\includegraphics[width=9cm]{table4.PDF}}
 \caption{Average Time for AWS Lambda and Google Cloud Functions from Table 2 and Table 3.}
-\label{fig}
+\label{fig:table4}
 \end{figure}
 
 
